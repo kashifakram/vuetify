@@ -1,32 +1,19 @@
 <template>
   <v-app>
     <v-app-bar app color="primary" dark>
-      <v-tollbar-title>Vuetify</v-tollbar-title>
+      <v-btn to="/">
+        <v-toolbar-title>Vuetify Dashboard</v-toolbar-title>
+      </v-btn>
       <v-spacer></v-spacer>
-      <v-btn text rounded>Home</v-btn>
-      <v-btn text rounded>Login</v-btn>
+      <v-btn text rounded to="/" color="white">Home</v-btn>
+
+        <v-btn v-for="navlink in headerNav" :key="`${navlink.label}-header-link`" text rounded :to="navlink.link"> 
+          {{ navlink.label }}
+        </v-btn>
     </v-app-bar>
-    <!-- LOgin Module -->
     <v-content>
-      <v-card width="400" class="mx-auto mt-5">
-        <v-card-title>
-          <h1 class="display-1">Login</h1>
-        </v-card-title>
-        <v-card-text>
-          <v-form>
-            <v-text-field label="username" prepend-icon="mdi-account-circle" />
-            <v-text-field :type="showPassword ? 'text' : 'password'" label="password" prepend-icon="mdi-lock" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" @click:append="showPassword = !showPassword" />
-          </v-form>
-        </v-card-text>
-        <v-divider></v-divider>
-        <v-card-actions>
-          <v-btn color="success">Register</v-btn>
-          <v-spacer></v-spacer>
-          <v-btn color="info">Login</v-btn>
-        </v-card-actions>
-      </v-card>
+      <router-view></router-view>
     </v-content>
-    
   <v-footer
     color="primary lighten-1"
     padless
@@ -35,15 +22,17 @@
       justify="center"
       no-gutters
     >
+    <v-btn text rounded to="/" color="white" class="my-2">Home</v-btn>
       <v-btn
-        v-for="link in links"
-        :key="link"
+        v-for="navlink in links"
+        :key='`${navlink.label}-footer-link`'
         color="white"
         text
         rounded
         class="my-2"
+        :to='navlink.link'
       >
-        {{ link }}
+        {{ navlink.label }}
       </v-btn>
       <v-col
         class="primary lighten-2 py-4 text-center white--text"
@@ -61,8 +50,48 @@ export default {
   name: "App",
   components: {},
   data: () => ({
-    showPassword: false,
-    links: ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"]
-  })
+    links: [
+      {
+        label: "Login",
+        link: { name: "login" },
+        isHeader: true
+      },
+      {
+        label: "Dashboard",
+        link: { name: "dashboard" },
+        isHeader: true
+      },
+      {
+        label: "About Us",
+        link: { name: "about-us" },
+        isHeader: false
+      },
+      {
+        label: "Team",
+        link: { name: "team" },
+        isHeader: false
+      },
+      {
+        label: "Services",
+        link: { name: "services" },
+        isHeader: true
+      },
+      {
+        label: "Blog",
+        link: { name: "blog" },
+        isHeader: false
+      },
+      {
+        label: "Contact Us",
+        link: { name: "contact-us" },
+        isHeader: false
+      }
+    ]
+  }),
+  computed: {
+    headerNav() {
+      return this.links.filter(el => el.isHeader);
+    }
+  }
 };
 </script>
