@@ -14,7 +14,7 @@
     >
       Selected Employee {{ currentRow }}
       <v-btn
-        color="red"
+        color="yellow"
         text
         @click="snackbar = false"
       >
@@ -32,25 +32,32 @@ export default {
       snackbar: false,
       headers: [
         {
-          text: "Dessert (100g serving)",
+          text: "id",
           align: "start",
           sortable: true,
-          value: "name"
+          value: "id"
         },
-        { text: "Calories", value: "calories" },
-        { text: "Fat (g)", value: "fat" },
-        { text: "Carbs (g)", value: "carbs" },
-        { text: "Protein (g)", value: "protein" },
-        { text: "Iron (%)", value: "iron" }
+        { text: "Name", value: "name" },
+        { text: "Position", value: "title" },
+        { text: "Salary", value: "salary" }
       ],
-      employees: null
+      employees: []
     };
   },
-  mounted() {},
+  mounted() {
+    this.axios
+      .get("data/employees.json")
+      .then(r => {
+        this.employees = r.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  },
   methods: {
     selectRow(row) {
       this.snackbar = true;
-      this.currentRow = `${row.name} with calories ${row.calories}`;
+      this.currentRow = `${row.name} with salary ${row.salary}`;
     }
   }
 };

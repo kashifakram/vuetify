@@ -6,7 +6,6 @@
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn text rounded to="/" color="white">Home</v-btn>
-
         <v-btn v-for="navlink in headerNav" :key="`${navlink.label}-header-link`" text rounded :to="navlink.link"> 
           {{ navlink.label }}
         </v-btn>
