@@ -1,16 +1,30 @@
 <template>
-    <div>
+    <v-container>
       <h1>Employees Dashboard</h1>
-      <SalesGraph v-for="sale in sales" :key="`${sale.title}`" :sale="sale" />
-      <StatisticCard v-for="stat in statistics" :key="`${stat.title}`" :statistic="stat" />
-      <Employees-data-set :employees="employees" @selected-employee="setEmployee" />
-      <EventTimeline :timeline="timeline" />
-      <v-snackbar v-model="snackbar">
+      <v-row>
+        <v-col v-for="sale in sales" :key="`${sale.title}`" cols="12" md="4">
+          <SalesGraph  :sale="sale" />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col v-for="stat in statistics" :key="`${stat.title}`" cols="12" md="6" lg="3">
+          <StatisticCard :statistic="stat" />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12" md="8">
+          <EmployeesDataSet :employees="employees" @selected-employee="setEmployee" />
+        </v-col>
+        <v-col cols="12" md="4">
+          <EventTimeline :timeline="timeline" />
+        </v-col>
+      </v-row>
+      <v-snackbar v-model="snackbar" :left="$vuetify.breakpoint.lgAndUp">
         Employee {{ selectedEmployee.name }} is {{ selectedEmployee.title }}
         <v-btn color="yellow" text @click="snackbar = false">Close</v-btn>
       </v-snackbar>
 
-    </div>
+    </v-container>
 </template>
 
 <script>

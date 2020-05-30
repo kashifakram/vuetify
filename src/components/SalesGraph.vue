@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-card :color="sale.color" dark>
-            <v-card-text>0
+            <v-card-text>
                 <v-sparkline
                 :value="sale.sales"
                 :labels="sale.labels"
