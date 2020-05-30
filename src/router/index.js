@@ -50,10 +50,10 @@ const routes = [
       import(/* webpackChunkName: "dashboard" */ "@/views/EmpDashBoard.vue"),
   },
   {
-    path: "/empdb",
-    name: "empdb",
+    path: "/signup",
+    name: "signup",
     component: () =>
-      import(/* webpackChunkName: "employees" */ "@/views/EmpDashBoard.vue"),
+      import(/* webpackChunkName: "employees" */ "@/views/SignUp.vue"),
   },
   {
     path: "/employees",

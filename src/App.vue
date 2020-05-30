@@ -73,7 +73,7 @@ export default {
       {
         label: "Services",
         link: { name: "services" },
-        isHeader: true
+        isHeader: false
       },
       {
         label: "Blog",
@@ -84,6 +84,11 @@ export default {
         label: "Contact Us",
         link: { name: "contact-us" },
         isHeader: false
+      },
+      {
+        label: "Register",
+        link: { name: "signup" },
+        isHeader: true
       }
     ]
   }),
